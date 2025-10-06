@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 90%; /* Cream/bone */
+    --foreground: 0 0% 10%; /* Deep charcoal */
+    --card: 40 30% 90%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 18 52% 48%; /* Burnt orange/rust */
+    --primary-foreground: 40 30% 90%;
+    --secondary: 36 26% 42%; /* Warm wood/tan */
+    --secondary-foreground: 40 30% 90%;
+    --muted: 36 21% 65%; /* Light taupe */
+    --muted-foreground: 0 0% 35%;
+    --accent: 40 39% 55%; /* Brass/gold */
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 72% 51%; /* Red */
+    --destructive-foreground: 0 0% 98%;
+    --border: 36 21% 75%;
+    --input: 36 21% 75%;
+    --ring: 40 39% 55%; /* Brass/gold */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 6%; /* Rich black */
+    --foreground: 40 30% 90%; /* Cream/bone */
+    --card: 0 0% 10%;
+    --card-foreground: 40 30% 90%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 40 30% 90%;
+    --primary: 18 52% 48%; /* Burnt orange/rust */
+    --primary-foreground: 40 30% 90%;
+    --secondary: 180 6% 22%; /* Dark slate */
+    --secondary-foreground: 40 30% 90%;
+    --muted: 180 6% 22%;
+    --muted-foreground: 36 21% 65%;
+    --accent: 40 39% 55%; /* Brass/gold */
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 180 6% 22%;
+    --input: 180 6% 22%;
+    --ring: 40 39% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
