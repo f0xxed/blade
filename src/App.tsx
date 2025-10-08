@@ -1,4 +1,5 @@
 import { HeroSection } from '@/components/HeroSection';
+import { ServicesSection } from '@/components/ServicesSection';
 
 function App() {
   /**
@@ -11,14 +12,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div>
       <HeroSection
         tagline="Groomed. Poured. Perfected."
         headline="Tampa's Premier Barbershop Meets Neighborhood Bar"
         ctaText="Book Appointment"
         onBookingClick={handleBookingClick}
       />
-      {/* Future sections will be added here: Services, About, Instagram, Location, Contact */}
+      <ServicesSection />
+      {/* Future sections will be added here: About, Instagram, Location, Contact */}
     </div>
   );
 }
