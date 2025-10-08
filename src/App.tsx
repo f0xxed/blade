@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,14 +13,14 @@ function App() {
         <p className="text-gray-300 mb-8">
           Tampa's Premier Barbershop - Coming Soon
         </p>
-        <button
+        <Button
           onClick={() => setCount((count) => count + 1)}
-          className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-6 rounded transition-colors"
+          className="bg-amber-600 hover:bg-amber-700"
         >
           count is {count}
-        </button>
+        </Button>
         <p className="text-gray-400 mt-8 text-sm">
-          Vite + React + TypeScript + Tailwind CSS
+          Vite + React + TypeScript + Tailwind CSS + shadcn/ui
         </p>
       </div>
     </div>

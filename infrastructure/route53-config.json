@@ -1,0 +1,10 @@
+{
+  "hostedZoneId": "Z0097765505SEDE32M9A",
+  "domainName": "bladeandbarrel.com",
+  "nameservers": [
+    "ns-18.awsdns-02.com",
+    "ns-1090.awsdns-08.org",
+    "ns-789.awsdns-34.net",
+    "ns-1852.awsdns-39.co.uk"
+  ]
+}

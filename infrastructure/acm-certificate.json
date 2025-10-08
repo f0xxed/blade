@@ -1,0 +1,11 @@
+{
+  "certificateArn": "arn:aws:acm:us-east-1:171087615758:certificate/3b2764e0-3eb7-407f-9587-159a37621b77",
+  "region": "us-east-1",
+  "domainName": "bladeandbarrel.com",
+  "subjectAlternativeNames": [
+    "bladeandbarrel.com",
+    "www.bladeandbarrel.com"
+  ],
+  "status": "ISSUED",
+  "validationMethod": "DNS"
+}
