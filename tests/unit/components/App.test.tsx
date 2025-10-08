@@ -31,13 +31,25 @@ describe('App - Coming Soon Landing Page', () => {
 
   it('displays the hero background image', () => {
     render(<App />);
-    const heroImage = screen.getByAltText(/blade and barrel interior/i);
-    expect(heroImage).toBeInTheDocument();
-    expect(heroImage).toHaveAttribute('src', '/images/hero.jpg');
+    const container = document.querySelector('.bg-cover.bg-center.bg-no-repeat');
+    expect(container).toBeInTheDocument();
+    expect(container).toHaveStyle({ backgroundImage: 'url(/images/hero.jpg)' });
   });
 
   it('displays the Grand Opening 2025 message', () => {
     render(<App />);
     expect(screen.getByText(/grand opening 2025/i)).toBeInTheDocument();
+  });
+
+  it('has proper accessibility attributes on main container', () => {
+    render(<App />);
+    const main = screen.getByRole('main');
+    expect(main).toHaveAttribute('aria-label', 'Coming soon landing page');
+  });
+
+  it('has proper accessibility attributes on hero background', () => {
+    render(<App />);
+    const heroImg = screen.getByRole('img', { name: /barbershop and bar interior/i });
+    expect(heroImg).toBeInTheDocument();
   });
 });
