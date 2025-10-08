@@ -1,16 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
 
-// Brand color constants for consistency and maintainability
-const colors = {
-  background: '#E8DCC8', // Cream/bone
-  text: '#1A1A1A', // Deep charcoal
-  accent: '#B8935E', // Brass/gold
-  cardBg: '#2C3539', // Dark card background
-  midTone: '#8B6F47', // Warm wood/tan
-  lightText: '#E8DCC8', // Light text for dark backgrounds
-  mutedText: '#D4C4B0', // Muted light text
-} as const;
-
 interface AboutSectionProps {
   className?: string;
 }
