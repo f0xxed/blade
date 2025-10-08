@@ -89,8 +89,8 @@ GitHub Secrets are encrypted environment variables used by the workflow. All sec
 
 | Secret Name | Value | Description |
 |------------|-------|-------------|
-| `AWS_ACCESS_KEY_ID` | `AKIASPVM524HEAACZ3AG` | IAM user access key for deployment |
-| `AWS_SECRET_ACCESS_KEY` | `5FS++...` | IAM user secret access key (encrypted) |
+| `AWS_ACCESS_KEY_ID` | `(stored in GitHub Secrets)` | IAM user access key for deployment |
+| `AWS_SECRET_ACCESS_KEY` | `(stored in GitHub Secrets)` | IAM user secret access key (encrypted) |
 | `S3_BUCKET` | `bladeandbarrel-site` | S3 bucket name for static hosting |
 | `CLOUDFRONT_DISTRIBUTION_ID` | `EJNJPQN7X1JDD` | CloudFront distribution ID for cache invalidation |
 | `VITE_API_BASE_URL` | `https://api.bladeandbarrel.com` | Backend API endpoint (placeholder for future) |

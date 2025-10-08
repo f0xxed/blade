@@ -1,0 +1,26 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blade and Barrel Logo -->
+  <!-- Barrel Icon -->
+  <g>
+    <rect x="70" y="60" width="60" height="80" rx="5" fill="#8B6F47" stroke="#B8935E" stroke-width="2"/>
+    <ellipse cx="100" cy="60" rx="30" ry="8" fill="#B8935E"/>
+    <ellipse cx="100" cy="140" rx="30" ry="8" fill="#8B6F47" stroke="#B8935E" stroke-width="2"/>
+    <line x1="75" y1="70" x2="75" y2="135" stroke="#B8935E" stroke-width="1" opacity="0.5"/>
+    <line x1="85" y1="70" x2="85" y2="135" stroke="#B8935E" stroke-width="1" opacity="0.5"/>
+    <line x1="95" y1="70" x2="95" y2="135" stroke="#B8935E" stroke-width="1" opacity="0.5"/>
+    <line x1="105" y1="70" x2="105" y2="135" stroke="#B8935E" stroke-width="1" opacity="0.5"/>
+    <line x1="115" y1="70" x2="115" y2="135" stroke="#B8935E" stroke-width="1" opacity="0.5"/>
+    <line x1="125" y1="70" x2="125" y2="135" stroke="#B8935E" stroke-width="1" opacity="0.5"/>
+    <rect x="85" y="90" width="30" height="25" rx="3" fill="#2C3539" stroke="#B8935E" stroke-width="1.5"/>
+  </g>
+
+  <!-- Razor Blade Icon (crossed over barrel) -->
+  <g>
+    <rect x="45" y="95" width="4" height="50" fill="#1A1A1A" stroke="#B8935E" stroke-width="0.5" transform="rotate(-25 47 120)"/>
+    <polygon points="47,85 45,95 49,95" fill="#E8DCC8" stroke="#B8935E" stroke-width="0.5" transform="rotate(-25 47 90)"/>
+  </g>
+
+  <!-- Text -->
+  <text x="100" y="165" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#E8DCC8" text-anchor="middle" letter-spacing="2">BLADE & BARREL</text>
+  <text x="100" y="180" font-family="Arial, sans-serif" font-size="10" font-weight="400" fill="#B8935E" text-anchor="middle" letter-spacing="1">THE BAR-BERSHOP</text>
+</svg>
