@@ -1,5 +1,6 @@
 import { HeroSection } from '@/components/HeroSection';
 import { ServicesSection } from '@/components/ServicesSection';
+import { AboutSection } from '@/components/AboutSection';
 
 function App() {
   /**
@@ -20,7 +21,8 @@ function App() {
         onBookingClick={handleBookingClick}
       />
       <ServicesSection />
-      {/* Future sections will be added here: About, Instagram, Location, Contact */}
+      <AboutSection />
+      {/* Future sections will be added here: Instagram, Location, Contact */}
     </div>
   );
 }
