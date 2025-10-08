@@ -1,55 +1,102 @@
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
 import App from '@/App';
 
-describe('App - Coming Soon Landing Page', () => {
+// Mock the console.log to avoid console noise in tests
+const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+describe('App - Hero Section with CTA (Story 2.1)', () => {
   it('renders without crashing', () => {
     render(<App />);
   });
 
-  it('displays the Blade and Barrel logo', () => {
-    render(<App />);
-    const logo = screen.getByAltText(/blade and barrel logo/i);
-    expect(logo).toBeInTheDocument();
-  });
-
-  it('displays the tagline', () => {
+  it('displays the tagline "Groomed. Poured. Perfected."', () => {
     render(<App />);
     expect(screen.getByText(/groomed\. poured\. perfected\./i)).toBeInTheDocument();
   });
 
-  it('displays the coming soon message', () => {
-    render(<App />);
-    expect(screen.getByText(/coming soon/i)).toBeInTheDocument();
-  });
-
-  it('displays Tampa location information', () => {
+  it('displays the headline about barbershop meets bar concept', () => {
     render(<App />);
     expect(screen.getByText(/tampa's premier barbershop meets neighborhood bar/i)).toBeInTheDocument();
-    expect(screen.getByText(/channelside district/i)).toBeInTheDocument();
   });
 
-  it('displays the hero background image', () => {
+  it('displays the Book Appointment CTA button', () => {
     render(<App />);
-    const container = document.querySelector('.bg-cover.bg-center.bg-no-repeat');
-    expect(container).toBeInTheDocument();
-    expect(container).toHaveStyle({ backgroundImage: 'url(/images/hero.jpg)' });
+    const ctaButton = screen.getByRole('button', { name: /book appointment/i });
+    expect(ctaButton).toBeInTheDocument();
   });
 
-  it('displays the Grand Opening 2025 message', () => {
+  it('calls booking handler when CTA button is clicked', () => {
     render(<App />);
-    expect(screen.getByText(/grand opening 2025/i)).toBeInTheDocument();
+    const ctaButton = screen.getByRole('button', { name: /book appointment/i });
+
+    fireEvent.click(ctaButton);
+
+    // Verify console.log was called (placeholder for booking integration)
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Booking initiated')
+    );
   });
 
-  it('has proper accessibility attributes on main container', () => {
+  it('has proper accessibility attributes on hero section', () => {
     render(<App />);
-    const main = screen.getByRole('main');
-    expect(main).toHaveAttribute('aria-label', 'Coming soon landing page');
+    const heroSection = screen.getByRole('banner');
+    expect(heroSection).toHaveAttribute('aria-label', 'Hero section');
   });
 
-  it('has proper accessibility attributes on hero background', () => {
-    render(<App />);
-    const heroImg = screen.getByRole('img', { name: /barbershop and bar interior/i });
-    expect(heroImg).toBeInTheDocument();
+  // Story 1.6: Image Optimization Tests
+  describe('Image Optimization (Story 1.6)', () => {
+    it('renders picture element with WebP and JPG sources', () => {
+      render(<App />);
+      const picture = document.querySelector('picture');
+      expect(picture).toBeInTheDocument();
+
+      const sources = picture?.querySelectorAll('source');
+      expect(sources?.length).toBeGreaterThanOrEqual(2); // WebP + JPG fallback
+    });
+
+    it('includes WebP source with correct type attribute', () => {
+      render(<App />);
+      const webpSource = document.querySelector('source[type="image/webp"]');
+      expect(webpSource).toBeInTheDocument();
+      expect(webpSource?.getAttribute('srcset')).toContain('.webp');
+    });
+
+    it('includes responsive srcset for mobile, tablet, and desktop', () => {
+      render(<App />);
+      const webpSource = document.querySelector('source[type="image/webp"]');
+      const srcset = webpSource?.getAttribute('srcset') || '';
+
+      expect(srcset).toContain('640w'); // Mobile
+      expect(srcset).toContain('1024w'); // Tablet
+      expect(srcset).toContain('1920w'); // Desktop
+    });
+
+    it('has descriptive alt text for hero image', () => {
+      render(<App />);
+      const heroImg = screen.getByAltText(/blade and barrel barbershop interior/i);
+      expect(heroImg).toBeInTheDocument();
+      expect(heroImg.getAttribute('alt')).not.toBe('');
+    });
+
+    it('does not apply lazy loading to hero image (above-the-fold)', () => {
+      render(<App />);
+      const heroImg = screen.getByAltText(/blade and barrel barbershop interior/i);
+      expect(heroImg.getAttribute('loading')).not.toBe('lazy');
+    });
+
+    it('uses organized image paths with subfolder structure', () => {
+      render(<App />);
+      const webpSource = document.querySelector('source[type="image/webp"]');
+      const srcset = webpSource?.getAttribute('srcset') || '';
+
+      expect(srcset).toContain('/images/hero/'); // Images in hero/ subfolder
+    });
+
+    it('hero image uses hero subfolder path', () => {
+      render(<App />);
+      const heroImg = screen.getByAltText(/blade and barrel barbershop interior/i);
+      expect(heroImg.getAttribute('src')).toContain('/images/hero/');
+    });
   });
 });
