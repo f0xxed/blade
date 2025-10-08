@@ -1,6 +1,7 @@
 import { HeroSection } from '@/components/HeroSection';
 import { ServicesSection } from '@/components/ServicesSection';
 import { AboutSection } from '@/components/AboutSection';
+import { LocationSection } from '@/components/LocationSection';
 
 function App() {
   /**
@@ -22,7 +23,8 @@ function App() {
       />
       <ServicesSection />
       <AboutSection />
-      {/* Future sections will be added here: Instagram, Location, Contact */}
+      <LocationSection />
+      {/* Future sections will be added here: Instagram, Contact */}
     </div>
   );
 }

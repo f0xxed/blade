@@ -76,12 +76,12 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
       </div>
 
       {/* Content overlay */}
-      <div className="relative z-10 text-center text-white px-4 md:px-8 lg:px-12 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center text-white px-4 md:px-8 lg:px-12 max-w-5xl mx-auto flex flex-col items-center">
         <motion.h1
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 text-amber-400"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 text-amber-400"
         >
           {tagline}
         </motion.h1>
@@ -90,7 +90,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
-          className="text-xl md:text-2xl lg:text-3xl font-light mb-8 text-slate-100"
+          className="text-xl md:text-2xl lg:text-3xl font-light mb-8 md:mb-12 text-slate-100 max-w-3xl"
         >
           {headline}
         </motion.h2>
