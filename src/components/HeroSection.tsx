@@ -50,7 +50,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
       aria-label="Hero section"
     >
       {/* Hero background image with responsive WebP support */}
-      <div className="relative h-[60vh] sm:h-[70vh] lg:h-screen overflow-hidden">
+      <div className="relative overflow-hidden sm:h-[70vh] lg:h-screen">
         <picture>
           <source
             srcSet="/images/hero/hero-desktop.webp 1920w, /images/hero/hero-tablet.webp 1024w, /images/hero/hero-mobile.webp 640w"
@@ -64,7 +64,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
           <img
             src="/images/hero/hero.jpg"
             alt="Blade and Barrel barbershop interior with vintage decor and bar seating"
-            className="absolute inset-0 w-full h-full object-cover object-[center_20%] sm:object-center"
+            className="w-full h-auto sm:absolute sm:inset-0 sm:h-[70vh] lg:h-screen sm:object-cover sm:object-center bg-[#1A1A1A]"
           />
         </picture>
 
