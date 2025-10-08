@@ -87,16 +87,51 @@ aws cloudfront create-invalidation --distribution-id EJNJPQN7X1JDD --paths "/*"
 aws cloudfront create-invalidation --distribution-id EJNJPQN7X1JDD --paths "/*"
 ```
 
-## IAM Permissions Required
+## IAM Users and Permissions
 
-### For Deployment (Day-to-day)
+### GitHub Actions Deployment User
+
+**User Name**: `github-actions-deploy`
+**User ARN**: `arn:aws:iam::171087615758:user/github-actions-deploy`
+**Purpose**: Automated CI/CD deployments via GitHub Actions
+**Created**: Story 1.4 (CI/CD Pipeline Implementation)
+
+**Attached Policy**: `GitHubActionsDeployPolicy`
+**Policy ARN**: `arn:aws:iam::171087615758:policy/GitHubActionsDeployPolicy`
+
+**Permissions (Minimal for Security):**
+
+S3 Permissions:
+- `s3:PutObject` - Upload files to S3 bucket
+- `s3:DeleteObject` - Delete files from S3 (for --delete flag during sync)
+- `s3:ListBucket` - List bucket contents for sync operations
+
+CloudFront Permissions:
+- `cloudfront:CreateInvalidation` - Invalidate CloudFront cache after deployment
+- `cloudfront:GetInvalidation` - Check invalidation status
+
+**Resource Scope:**
+- S3: `arn:aws:s3:::bladeandbarrel-site` and `arn:aws:s3:::bladeandbarrel-site/*`
+- CloudFront: `arn:aws:cloudfront::171087615758:distribution/EJNJPQN7X1JDD`
+
+**Access Keys**: Stored in GitHub Secrets (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+
+**Security Best Practices:**
+- Credentials stored encrypted in GitHub Secrets
+- Minimal permissions following principle of least privilege
+- No console access (programmatic access only)
+- Rotate access keys every 90 days (recommended)
+
+### IAM Permissions Required
+
+#### For Automated Deployment (GitHub Actions)
 - `s3:PutObject` - Upload files to S3
 - `s3:DeleteObject` - Delete files from S3 (for --delete flag)
 - `s3:ListBucket` - List bucket contents
 - `cloudfront:CreateInvalidation` - Invalidate CloudFront cache
 - `cloudfront:GetInvalidation` - Check invalidation status
 
-### For Infrastructure Setup (One-time)
+#### For Infrastructure Setup (One-time)
 - `route53:CreateHostedZone` - Create hosted zone
 - `route53:GetHostedZone` - Get hosted zone details
 - `route53:ListHostedZones` - List hosted zones

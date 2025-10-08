@@ -1,5 +1,7 @@
 # Blade and Barrel - Tampa's Premier Barbershop
 
+[![Deploy to AWS](https://github.com/f0xxed/blade/workflows/Deploy%20to%20AWS/badge.svg)](https://github.com/f0xxed/blade/actions/workflows/deploy.yml)
+
 A modern, high-performance single-page application for Blade and Barrel barbershop, located in Tampa's Channelside District.
 
 ## Tech Stack
@@ -168,8 +170,29 @@ This project is deployed to AWS using S3 for static hosting and CloudFront for g
 
 ### Deployment
 
-#### Prerequisites
+#### Automated Deployment (GitHub Actions)
 
+The project uses **GitHub Actions** for automated deployment. Every push to the `main` branch automatically:
+
+1. Builds the production bundle
+2. Syncs files to S3 with optimized cache headers
+3. Invalidates CloudFront cache for fresh content delivery
+
+**Deployment workflow status:** Check the badge above or visit the [Actions tab](https://github.com/f0xxed/blade/actions).
+
+**Manual deployment trigger:**
+```bash
+# Trigger workflow manually via GitHub CLI
+gh workflow run deploy.yml
+
+# Or use the GitHub UI: Actions → Deploy to AWS → Run workflow
+```
+
+#### Manual Deployment (CLI)
+
+For manual deployments or emergency rollbacks:
+
+**Prerequisites:**
 - AWS CLI v2.x installed
 - AWS credentials configured (`aws configure`)
 - IAM permissions required:
@@ -179,16 +202,22 @@ This project is deployed to AWS using S3 for static hosting and CloudFront for g
   - `cloudfront:CreateInvalidation`
   - `cloudfront:GetInvalidation`
 
-#### Deploy to Production
+**Deploy to Production:**
 
 ```bash
 # 1. Build production bundle
 npm run build
 
-# 2. Upload to S3
-aws s3 sync dist/ s3://bladeandbarrel-site/ --delete
+# 2. Sync assets with long-term caching (excludes index.html)
+aws s3 sync dist/ s3://bladeandbarrel-site/ --delete \
+  --cache-control "public, max-age=31536000, immutable" \
+  --exclude "index.html"
 
-# 3. Invalidate CloudFront cache (ensures fresh content)
+# 3. Upload index.html with no-cache headers
+aws s3 cp dist/index.html s3://bladeandbarrel-site/index.html \
+  --cache-control "no-cache, no-store, must-revalidate"
+
+# 4. Invalidate CloudFront cache (ensures fresh content)
 aws cloudfront create-invalidation --distribution-id EJNJPQN7X1JDD --paths "/*"
 ```
 
