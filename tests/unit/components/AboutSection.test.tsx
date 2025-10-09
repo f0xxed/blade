@@ -54,8 +54,8 @@ describe('AboutSection Component', () => {
   it('has proper section padding classes', () => {
     const { container } = render(<AboutSection />);
     const section = container.querySelector('section');
-    expect(section?.className).toContain('py-16');
-    expect(section?.className).toContain('md:py-24');
+    expect(section?.className).toContain('py-12'); // Updated from py-16 to reduce blank space (Story 2.7 QA review)
+    expect(section?.className).toContain('md:py-16'); // Updated from py-24 to reduce blank space (Story 2.7 QA review)
   });
 
   it('has proper ARIA label for accessibility', () => {

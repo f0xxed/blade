@@ -85,7 +85,7 @@ describe('ServicesSection Component', () => {
     const section = container.querySelector('section');
 
     expect(section?.className).toContain('py-16');
-    expect(section?.className).toContain('md:py-24');
+    expect(section?.className).toContain('md:py-20'); // Updated from py-24 to reduce blank space (Story 2.7 QA review)
   });
 
   it('renders cards with proper structure', () => {

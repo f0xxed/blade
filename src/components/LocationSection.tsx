@@ -9,6 +9,7 @@ export function LocationSection({ className }: LocationSectionProps = {}) {
 
   return (
     <motion.section
+      id="location"
       initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
       whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}

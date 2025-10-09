@@ -39,8 +39,9 @@ export function ServicesSection() {
 
   return (
     <motion.section
+      id="services"
       {...containerAnimation}
-      className="py-16 md:py-24 px-4 md:px-8"
+      className="py-16 md:py-20 px-4 md:px-8"
       aria-label="Services section"
     >
       <div className="max-w-7xl mx-auto">

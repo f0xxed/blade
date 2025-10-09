@@ -12,12 +12,16 @@ describe('App - Hero Section with CTA (Story 2.1)', () => {
 
   it('displays the tagline "Groomed. Poured. Perfected."', () => {
     render(<App />);
-    expect(screen.getByText(/groomed\. poured\. perfected\./i)).toBeInTheDocument();
+    const taglines = screen.getAllByText(/groomed\. poured\. perfected\./i);
+    expect(taglines.length).toBeGreaterThan(0);
+    expect(taglines[0]).toBeInTheDocument();
   });
 
   it('displays the headline about barbershop meets bar concept', () => {
     render(<App />);
-    expect(screen.getByText(/tampa's premier barbershop meets neighborhood bar/i)).toBeInTheDocument();
+    const headlines = screen.getAllByText(/tampa's premier barbershop meets neighborhood bar/i);
+    expect(headlines.length).toBeGreaterThan(0);
+    expect(headlines[0]).toBeInTheDocument();
   });
 
   it('displays the Book Appointment CTA button', () => {
@@ -40,7 +44,10 @@ describe('App - Hero Section with CTA (Story 2.1)', () => {
 
   it('has proper accessibility attributes on hero section', () => {
     render(<App />);
-    const heroSection = screen.getByRole('banner');
+    // Multiple banner roles exist (Header and HeroSection), so get all and find the one with 'Hero section' label
+    const banners = screen.getAllByRole('banner');
+    const heroSection = banners.find(el => el.getAttribute('aria-label') === 'Hero section');
+    expect(heroSection).toBeDefined();
     expect(heroSection).toHaveAttribute('aria-label', 'Hero section');
   });
 

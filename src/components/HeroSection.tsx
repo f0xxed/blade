@@ -43,6 +43,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
 
   return (
     <motion.section
+      id="hero"
       {...animationVariants}
       transition={{ duration: 0.8, ease: 'easeOut' }}
       className="relative flex flex-col"

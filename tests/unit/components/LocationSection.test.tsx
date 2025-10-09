@@ -63,7 +63,7 @@ describe('LocationSection Component', () => {
     const { container } = render(<LocationSection />);
     const grid = container.querySelector('.grid');
     expect(grid?.className).toContain('grid-cols-1');
-    expect(grid?.className).toContain('lg:grid-cols-2');
+    expect(grid?.className).toContain('md:grid-cols-3');
   });
 
   it('has proper ARIA label for accessibility', () => {

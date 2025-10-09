@@ -9,11 +9,12 @@ export function AboutSection({ className }: AboutSectionProps = {}) {
 
   return (
     <motion.section
+      id="about"
       initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
       whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6 }}
-      className={`py-16 md:py-24 px-4 md:px-8 bg-[#E8DCC8] ${className || ''}`}
+      className={`py-12 md:py-16 px-4 md:px-8 bg-[#E8DCC8] ${className || ''}`}
       aria-label="About Blade and Barrel"
     >
       <div className="max-w-7xl mx-auto">

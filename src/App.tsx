@@ -1,8 +1,10 @@
+import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/HeroSection';
 import { ServicesSection } from '@/components/ServicesSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ContactForm } from '@/components/ContactForm';
 import { LocationSection } from '@/components/LocationSection';
+import { ScrollToTopButton } from '@/components/ScrollToTopButton';
 
 function App() {
   /**
@@ -16,6 +18,10 @@ function App() {
 
   return (
     <div>
+      {/* Sticky Navigation Header */}
+      <Header onBookingClick={handleBookingClick} />
+
+      {/* Page Sections */}
       <HeroSection
         tagline="Groomed. Poured. Perfected."
         headline="Tampa's Premier Barbershop Meets Neighborhood Bar"
@@ -27,6 +33,9 @@ function App() {
       <ContactForm />
       <LocationSection />
       {/* Future sections will be added here: Instagram */}
+
+      {/* Scroll to Top Button - Appears after 400px scroll */}
+      <ScrollToTopButton />
     </div>
   );
 }
