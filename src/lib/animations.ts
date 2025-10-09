@@ -1,4 +1,4 @@
-import { Variants } from 'framer-motion';
+import { Variants, Transition } from 'framer-motion';
 
 /**
  * Reusable Framer Motion Animation Variants
@@ -11,11 +11,18 @@ import { Variants } from 'framer-motion';
  */
 
 /**
- * Fade-in-up animation: Element slides up while fading in
- * Used for: Section reveals, card animations
- * Duration: 600ms (responsive feel per front-end spec)
+ * Common viewport configuration for scroll-triggered animations
  */
-export const fadeInUp: Variants = {
+export const defaultViewport = {
+  once: true, // Animate only once, don't re-trigger on scroll back
+  amount: 0.05, // Trigger when 5% visible for better UX
+};
+
+/**
+ * Fade-in-up animation variants
+ * Used for: Section reveals, card animations
+ */
+export const fadeInUpVariants: Variants = {
   initial: {
     opacity: 0,
     y: 40, // Start 40px below final position
@@ -24,44 +31,36 @@ export const fadeInUp: Variants = {
     opacity: 1,
     y: 0,
   },
-  viewport: {
-    once: true, // Animate only once, don't re-trigger on scroll back
-    amount: 0.3, // Trigger when 30% visible (per AC 3)
-  },
-  transition: {
-    duration: 0.6,
-    ease: 'easeOut',
-  },
+};
+
+export const fadeInUpTransition: Transition = {
+  duration: 0.6,
+  ease: 'easeOut',
 };
 
 /**
- * Fade-in animation: Element fades in without movement
+ * Fade-in animation variants
  * Used for: Backgrounds, overlays, simple reveals
- * Duration: 600ms
  */
-export const fadeIn: Variants = {
+export const fadeInVariants: Variants = {
   initial: {
     opacity: 0,
   },
   whileInView: {
     opacity: 1,
   },
-  viewport: {
-    once: true,
-    amount: 0.05, // Trigger when 5% visible for better UX
-  },
-  transition: {
-    duration: 0.6,
-    ease: 'easeOut',
-  },
+};
+
+export const fadeInTransition: Transition = {
+  duration: 0.6,
+  ease: 'easeOut',
 };
 
 /**
- * Stagger container animation: Parent container for staggered children
+ * Stagger container animation variants
  * Used for: Service cards grid, lists of items
- * Delay: 100ms between each child (per front-end spec)
  */
-export const staggerContainer: Variants = {
+export const staggerContainerVariants: Variants = {
   initial: {},
   whileInView: {
     transition: {
@@ -69,17 +68,13 @@ export const staggerContainer: Variants = {
       delayChildren: 0.2, // 200ms initial delay before first child
     },
   },
-  viewport: {
-    once: true,
-    amount: 0.05, // Trigger when 5% visible for better UX
-  },
 };
 
 /**
- * Stagger item animation: Child items within staggered container
+ * Stagger item animation variants
  * Used with: staggerContainer parent
  */
-export const staggerItem: Variants = {
+export const staggerItemVariants: Variants = {
   initial: {
     opacity: 0,
     y: 20,
@@ -88,18 +83,19 @@ export const staggerItem: Variants = {
     opacity: 1,
     y: 0,
   },
-  transition: {
-    duration: 0.5,
-    ease: 'easeOut',
-  },
+};
+
+export const staggerItemTransition: Transition = {
+  duration: 0.5,
+  ease: 'easeOut',
 };
 
 /**
- * Hero entrance animation: Page load animation for hero section
+ * Hero entrance animation variants
  * Used for: Hero text, CTA button
  * Note: Uses `animate` prop instead of `whileInView` for immediate page load animation
  */
-export const heroEntrance = {
+export const heroEntranceVariants: Variants = {
   initial: {
     opacity: 0,
     y: 20,
@@ -108,18 +104,18 @@ export const heroEntrance = {
     opacity: 1,
     y: 0,
   },
-  transition: {
-    duration: 0.8,
-    ease: 'easeOut',
-  },
+};
+
+export const heroEntranceTransition: Transition = {
+  duration: 0.8,
+  ease: 'easeOut',
 };
 
 /**
- * Slide-in from right: Mobile menu animation
+ * Slide-in from right animation variants
  * Used for: Mobile hamburger menu panel
- * Duration: 300ms (fast for UI feedback)
  */
-export const slideInRight: Variants = {
+export const slideInRightVariants: Variants = {
   initial: {
     x: '100%',
   },
@@ -129,17 +125,18 @@ export const slideInRight: Variants = {
   exit: {
     x: '100%',
   },
-  transition: {
-    duration: 0.3,
-    ease: 'easeOut',
-  },
+};
+
+export const slideInRightTransition: Transition = {
+  duration: 0.3,
+  ease: 'easeOut',
 };
 
 /**
- * Backdrop fade: Overlay fade-in/out for modals, mobile menu
- * Duration: 200ms (fast for responsiveness)
+ * Backdrop fade animation variants
+ * Used for: Overlay fade-in/out for modals, mobile menu
  */
-export const backdropFade: Variants = {
+export const backdropFadeVariants: Variants = {
   initial: {
     opacity: 0,
   },
@@ -149,29 +146,36 @@ export const backdropFade: Variants = {
   exit: {
     opacity: 0,
   },
-  transition: {
-    duration: 0.2,
-  },
+};
+
+export const backdropFadeTransition: Transition = {
+  duration: 0.2,
 };
 
 /**
- * Scale on hover: Subtle scale-up for interactive elements
+ * Scale on hover animation variants
  * Used for: Buttons, cards
- * Scale: 1.02x (subtle, not overwhelming)
  */
-export const scaleOnHover = {
+export const scaleOnHoverVariants: Variants = {
   hover: {
     scale: 1.02,
-    transition: {
-      duration: 0.15,
-      ease: 'easeOut',
-    },
   },
   tap: {
     scale: 0.98,
-    transition: {
-      duration: 0.1,
-      ease: 'easeIn',
-    },
   },
 };
+
+export const scaleOnHoverTransition: Transition = {
+  duration: 0.15,
+  ease: 'easeOut',
+};
+
+// Backward compatibility exports (deprecated - use separate variants and configs)
+export const fadeInUp = fadeInUpVariants;
+export const fadeIn = fadeInVariants;
+export const staggerContainer = staggerContainerVariants;
+export const staggerItem = staggerItemVariants;
+export const heroEntrance = heroEntranceVariants;
+export const slideInRight = slideInRightVariants;
+export const backdropFade = backdropFadeVariants;
+export const scaleOnHover = scaleOnHoverVariants;
