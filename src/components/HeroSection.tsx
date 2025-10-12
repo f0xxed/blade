@@ -46,7 +46,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
       id="hero"
       {...animationVariants}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="relative flex flex-col"
+      className="relative flex flex-col pt-[72px]"
       role="banner"
       aria-label="Hero section"
     >
@@ -82,7 +82,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 text-amber-400"
+              className="text-[2.5rem] md:text-6xl lg:text-[4rem] font-bold mb-6 md:mb-8 text-amber-400"
             >
               {tagline}
             </motion.h1>
@@ -120,7 +120,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
-            className="text-3xl sm:text-4xl font-bold mb-6 text-amber-400"
+            className="text-[2.5rem] sm:text-5xl font-bold mb-6 text-amber-400"
           >
             {tagline}
           </motion.h1>
