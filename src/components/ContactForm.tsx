@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Form,
   FormField,
@@ -44,7 +44,6 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ className }: ContactFormProps = {}) {
-  const shouldReduceMotion = useReducedMotion();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -81,17 +80,13 @@ export function ContactForm({ className }: ContactFormProps = {}) {
   };
 
   return (
-    <motion.section
+    <section
       id="contact"
-      initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
-      whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6 }}
-      className={`py-16 md:py-24 px-4 md:px-8 bg-[#E8DCC8] ${className || ''}`}
+      className={`py-12 md:py-20 px-4 md:px-8 bg-[#E8DCC8] ${className || ''}`}
       aria-label="Contact Form"
     >
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#1A1A1A]">Get In Touch</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-8 text-[#1A1A1A]">Get In Touch</h2>
 
         {/* Success Message */}
         {submissionStatus === 'success' && (
@@ -255,6 +250,6 @@ export function ContactForm({ className }: ContactFormProps = {}) {
           </form>
         </Form>
       </div>
-    </motion.section>
+    </section>
   );
 }

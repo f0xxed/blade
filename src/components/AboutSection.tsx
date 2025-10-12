@@ -1,33 +1,20 @@
-import { motion, useReducedMotion } from 'framer-motion';
-
 interface AboutSectionProps {
   className?: string;
 }
 
 export function AboutSection({ className }: AboutSectionProps = {}) {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
-    <motion.section
+    <section
       id="about"
-      initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
-      whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6 }}
-      className={`py-12 md:py-16 px-4 md:px-8 bg-[#E8DCC8] ${className || ''}`}
+      className={`py-12 md:py-20 px-4 md:px-8 bg-[#E8DCC8] ${className || ''}`}
       aria-label="About Blade and Barrel"
     >
       <div className="max-w-7xl mx-auto">
         {/* Two-column grid layout: text left, image right on desktop; stacked on mobile */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Text content (left on desktop, top on mobile) */}
-          <motion.div
-            initial={shouldReduceMotion ? {} : { opacity: 0, x: -30 }}
-            whileInView={shouldReduceMotion ? {} : { opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1A1A1A]">
+          <div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-[#1A1A1A]">
               Our Story
             </h2>
 
@@ -58,33 +45,21 @@ export function AboutSection({ className }: AboutSectionProps = {}) {
                 value quality, community, and craftsmanship.
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Image content (right on desktop, bottom on mobile) */}
-          <motion.div
-            initial={shouldReduceMotion ? {} : { opacity: 0, x: 30 }}
-            whileInView={shouldReduceMotion ? {} : { opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="relative"
-          >
+          <div className="relative">
             <img
               src="/images/Barbearia industrial.jpg"
               alt="Blade and Barrel interior showcasing industrial-modern barbershop atmosphere with exposed brick and premium fixtures"
               className="rounded-lg shadow-lg w-full h-auto object-cover"
               loading="lazy"
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* Founder bio section */}
-        <motion.div
-          initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
-          whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 p-8 bg-[#2C3539] rounded-lg"
-        >
+        <div className="mt-16 p-8 bg-[#2C3539] rounded-lg">
           <div className="flex flex-col md:flex-row gap-8 items-center">
             {/* Founder photo */}
             <div className="flex-shrink-0">
@@ -113,8 +88,8 @@ export function AboutSection({ className }: AboutSectionProps = {}) {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

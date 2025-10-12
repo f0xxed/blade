@@ -176,10 +176,11 @@ describe('HeroSection Component', () => {
       const taglines = screen.getAllByRole('heading', { level: 1 });
       const taglineClass = taglines[0].className;
 
-      // Check for responsive text sizing
-      expect(taglineClass).toMatch(/text-4xl/); // Mobile
-      expect(taglineClass).toMatch(/md:text-6xl/); // Tablet
-      expect(taglineClass).toMatch(/lg:text-7xl/); // Desktop
+      // Check for responsive text sizing (updated to match front-end spec - Story 2.8)
+      // H1: 40px (2.5rem) mobile → 64px (4rem) desktop
+      expect(taglineClass).toMatch(/text-\[2\.5rem\]/); // Mobile: 40px (2.5rem)
+      expect(taglineClass).toMatch(/md:text-6xl/); // Tablet: 60px
+      expect(taglineClass).toMatch(/lg:text-\[4rem\]/); // Desktop: 64px (4rem)
     });
 
     it('applies flexbox layout for content', () => {

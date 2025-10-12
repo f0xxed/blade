@@ -17,12 +17,13 @@ function App() {
   };
 
   return (
-    <div>
-      {/* Sticky Navigation Header */}
+    <div className="overflow-x-hidden w-full">
+      {/* Fixed Navigation Header */}
       <Header onBookingClick={handleBookingClick} />
 
       {/* Page Sections */}
-      <HeroSection
+      <main>
+        <HeroSection
         tagline="Groomed. Poured. Perfected."
         headline="Tampa's Premier Barbershop Meets Neighborhood Bar"
         ctaText="Coming Soon!"
@@ -32,10 +33,11 @@ function App() {
       <AboutSection />
       <ContactForm />
       <LocationSection />
-      {/* Future sections will be added here: Instagram */}
+        {/* Future sections will be added here: Instagram */}
 
-      {/* Scroll to Top Button - Appears after 400px scroll */}
-      <ScrollToTopButton />
+        {/* Scroll to Top Button - Appears after 400px scroll */}
+        <ScrollToTopButton />
+      </main>
     </div>
   );
 }

@@ -55,10 +55,47 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%;
   }
 
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    min-height: 100vh; /* Prevent white gaps */
+    width: 100%;
+    position: relative;
+  }
+
+  /* Prevent images from causing horizontal overflow */
+  img,
+  picture,
+  video,
+  canvas,
+  svg,
+  iframe {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ensure sections have backgrounds immediately to prevent white gaps */
+  section[aria-label="Services section"] {
+    background-color: hsl(var(--background)) !important;
+  }
+
+  section[aria-label="About Blade and Barrel"] {
+    background-color: #E8DCC8 !important;
+  }
+
+  section[aria-label="Contact Form"] {
+    background-color: #E8DCC8 !important;
+  }
+
+  section[aria-label="Location and Hours"] {
+    background-color: #2C3539 !important;
+  }
+
+  section[aria-label="Hero section"] {
+    background-color: #1A1A1A !important;
   }
 }
