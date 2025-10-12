@@ -53,7 +53,7 @@ export function Header({ onBookingClick }: HeaderProps) {
         initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`sticky top-0 z-50 bg-[#1A1A1A] transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 bg-[#1A1A1A] transition-all duration-300 ${
           isScrolled ? 'shadow-lg' : ''
         }`}
       >
@@ -64,7 +64,7 @@ export function Header({ onBookingClick }: HeaderProps) {
           </div>
 
           {/* Desktop Navigation - Hidden on mobile */}
-          <ul className="hidden md:flex gap-8 items-center">
+          <ul className="hidden md:flex gap-4 lg:gap-8 items-center">
             {navLinks.map((link) => (
               <li key={link.sectionId}>
                 <a
@@ -73,7 +73,7 @@ export function Header({ onBookingClick }: HeaderProps) {
                     e.preventDefault();
                     handleNavClick(link.sectionId);
                   }}
-                  className="text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200 text-base font-medium"
+                  className="text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200 text-sm lg:text-base font-medium whitespace-nowrap"
                 >
                   {link.label}
                 </a>
@@ -81,11 +81,11 @@ export function Header({ onBookingClick }: HeaderProps) {
             ))}
           </ul>
 
-          {/* Desktop Book Appointment Button - Hidden on mobile */}
-          <div className="hidden md:block">
+          {/* Desktop Book Appointment Button - Hidden on mobile, shows at lg breakpoint to prevent crowding */}
+          <div className="hidden lg:block">
             <Button
               onClick={handleBookingClick}
-              className="bg-[#B8935E] hover:bg-[#A07D4A] text-[#1A1A1A] font-semibold px-6 py-2 transition-colors duration-200"
+              className="bg-[#B8935E] hover:bg-[#A07D4A] text-[#1A1A1A] font-semibold px-4 lg:px-6 py-2 transition-colors duration-200 whitespace-nowrap text-sm lg:text-base"
             >
               Book Appointment
             </Button>
@@ -94,7 +94,7 @@ export function Header({ onBookingClick }: HeaderProps) {
           {/* Mobile Hamburger Menu Button - Visible on mobile only */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200"
+            className="md:hidden text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200 p-3"
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMobileMenuOpen}
           >
@@ -136,7 +136,7 @@ export function Header({ onBookingClick }: HeaderProps) {
               <div className="flex justify-end p-4">
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200"
+                  className="text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200 p-3"
                   aria-label="Close menu"
                 >
                   <X className="h-6 w-6" aria-hidden="true" />
