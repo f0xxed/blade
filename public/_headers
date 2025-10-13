@@ -1,0 +1,44 @@
+# Security Headers for Production Deployment
+# Compatible with: Netlify, Cloudflare Pages
+# For AWS CloudFront: Use CloudFront Functions or Lambda@Edge
+
+/*
+  # Prevent MIME type sniffing
+  X-Content-Type-Options: nosniff
+
+  # Prevent clickjacking attacks
+  X-Frame-Options: DENY
+
+  # HTTP Strict Transport Security - Force HTTPS for 1 year
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Control referrer information sent to other sites
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Restrict browser features and APIs (improves privacy)
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
+
+  # Content Security Policy - Strict security policy
+  # Adjust if you add external scripts/styles (e.g., Google Analytics, fonts)
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-PLACEHOLDER'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+
+  # Cross-Origin policies for enhanced security
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+  # Remove server information
+  X-Powered-By:
+  Server:
+
+# Cache control for static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache control for images
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# No cache for HTML files (always get fresh version)
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate
