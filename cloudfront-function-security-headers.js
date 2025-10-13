@@ -41,8 +41,9 @@ function handler(event) {
 
     // Content Security Policy - Strict policy for A+ rating
     // NO unsafe-inline needed - all scripts/styles are external files
+    // frame-src allows Google Maps embed
     headers['content-security-policy'] = {
-        value: "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+        value: "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
     };
 
     // Cross-Origin policies for enhanced security

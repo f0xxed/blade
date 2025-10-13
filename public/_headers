@@ -20,7 +20,8 @@
 
   # Content Security Policy - Strict A+ rating policy (no unsafe-inline needed)
   # All scripts and styles are in external files, not inline
-  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  # frame-src allows Google Maps embed
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
   # Cross-Origin policies for enhanced security
   Cross-Origin-Embedder-Policy: require-corp

@@ -58,6 +58,7 @@ export function securityHeadersPlugin(): Plugin {
         );
 
         // Strict CSP for preview (A+ rating - no unsafe-inline needed)
+        // frame-src allows Google Maps embed
         res.setHeader(
           'Content-Security-Policy',
           "default-src 'none'; " +
@@ -66,6 +67,7 @@ export function securityHeadersPlugin(): Plugin {
           "img-src 'self' data: https:; " +
           "font-src 'self' data:; " +
           "connect-src 'self' https:; " +
+          "frame-src https://www.google.com; " +
           "frame-ancestors 'none'; " +
           "base-uri 'self'; " +
           "form-action 'self'; " +
