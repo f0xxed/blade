@@ -18,9 +18,9 @@
   # Restrict browser features and APIs (improves privacy)
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
 
-  # Content Security Policy - Strict security policy
-  # Adjust if you add external scripts/styles (e.g., Google Analytics, fonts)
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-PLACEHOLDER'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+  # Content Security Policy - Strict A+ rating policy (no unsafe-inline needed)
+  # All scripts and styles are in external files, not inline
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
   # Cross-Origin policies for enhanced security
   Cross-Origin-Embedder-Policy: require-corp

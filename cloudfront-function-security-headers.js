@@ -39,10 +39,10 @@ function handler(event) {
         value: 'camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()'
     };
 
-    // Content Security Policy - Prevents XSS attacks
-    // Adjust this if you add external scripts (Google Analytics, etc.)
+    // Content Security Policy - Strict policy for A+ rating
+    // NO unsafe-inline needed - all scripts/styles are external files
     headers['content-security-policy'] = {
-        value: "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+        value: "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
     };
 
     // Cross-Origin policies for enhanced security

@@ -57,18 +57,19 @@ export function securityHeadersPlugin(): Plugin {
           'camera=(), microphone=(), geolocation=(), interest-cohort=()'
         );
 
-        // Stricter CSP for preview (no unsafe-eval)
+        // Strict CSP for preview (A+ rating - no unsafe-inline needed)
         res.setHeader(
           'Content-Security-Policy',
-          "default-src 'self'; " +
-          "script-src 'self' 'unsafe-inline'; " +
-          "style-src 'self' 'unsafe-inline'; " +
+          "default-src 'none'; " +
+          "script-src 'self'; " +
+          "style-src 'self'; " +
           "img-src 'self' data: https:; " +
           "font-src 'self' data:; " +
-          "connect-src 'self'; " +
+          "connect-src 'self' https:; " +
           "frame-ancestors 'none'; " +
           "base-uri 'self'; " +
           "form-action 'self'; " +
+          "object-src 'none'; " +
           "upgrade-insecure-requests"
         );
 
