@@ -39,7 +39,8 @@ export function securityHeadersPlugin(): Plugin {
         );
 
         // Cross-Origin policies
-        res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+        // NOTE: COEP removed - incompatible with Google Maps and other third-party iframes
+        // res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
         res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
         res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
 
@@ -79,7 +80,8 @@ export function securityHeadersPlugin(): Plugin {
         // Commented out for local preview, uncomment if preview is served over HTTPS
         // res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 
-        res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+        // NOTE: COEP removed - incompatible with Google Maps and other third-party iframes
+        // res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
         res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
         res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
 

@@ -24,7 +24,8 @@
   Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
   # Cross-Origin policies for enhanced security
-  Cross-Origin-Embedder-Policy: require-corp
+  # NOTE: COEP removed - incompatible with Google Maps and other third-party iframes
+  # Cross-Origin-Embedder-Policy: require-corp
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
 

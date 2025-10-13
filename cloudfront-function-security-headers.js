@@ -47,7 +47,8 @@ function handler(event) {
     };
 
     // Cross-Origin policies for enhanced security
-    headers['cross-origin-embedder-policy'] = { value: 'require-corp' };
+    // NOTE: COEP removed - incompatible with Google Maps and other third-party iframes
+    // headers['cross-origin-embedder-policy'] = { value: 'require-corp' };
     headers['cross-origin-opener-policy'] = { value: 'same-origin' };
     headers['cross-origin-resource-policy'] = { value: 'same-origin' };
 
