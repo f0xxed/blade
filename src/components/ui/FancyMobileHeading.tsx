@@ -81,11 +81,7 @@ export function FancyHeading({
               key={index}
               className={`${currentSize.text} font-bold ${textColors[index % textColors.length]} leading-none`}
               style={{
-                paddingLeft: noIndent ? 0 : `${index * currentSize.indent}rem`,
-                // Add responsive padding adjustments
-                '@media (min-width: 640px)': {
-                  paddingLeft: noIndent ? 0 : `${index * currentSize.indent * 1.2}rem`
-                }
+                paddingLeft: noIndent ? 0 : `${index * currentSize.indent}rem`
               }}
             >
               {word}
@@ -113,10 +109,10 @@ export function FancyMobileHeadingAlternate({
   textColors = ['text-amber-400', 'text-amber-300'],
   size = 'medium',
   animationDelay = 0.2
-}: FancyMobileHeadingProps) {
+}: FancyHeadingProps) {
   const shouldReduceMotion = useReducedMotion();
 
-  const sizeClasses = {
+  const sizeClasses: Record<'small' | 'medium' | 'large', string> = {
     small: 'text-2xl',
     medium: 'text-3xl',
     large: 'text-4xl'
@@ -134,7 +130,7 @@ export function FancyMobileHeadingAlternate({
       <div className="flex gap-3">
         <div className={`w-0.5 ${lineColor} self-stretch`}></div>
         <div className="space-y-2">
-          {words.map((word, index) => (
+          {words.map((word: string, index: number) => (
             <motion.h2
               key={index}
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: -20 }}
