@@ -140,7 +140,7 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
-              className="mb-12"
+              className="mb-2"
             >
               <div className="space-y-0.5">
                 <h2 className="text-lg sm:text-xl text-slate-100 font-light leading-tight">Tampa's Premier</h2>
@@ -148,34 +148,32 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
                 <h2 className="text-lg sm:text-xl text-slate-100 font-light leading-tight">Neighborhood Bar</h2>
               </div>
             </motion.div>
-          </div>
-        </div>
 
-        {/* Modern Scroll Indicator - Mobile */}
-        <div className="flex flex-col items-center pb-6">
-          <motion.button
-            onClick={() => {
-              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
-            animate={{
-              opacity: 1,
-              y: shouldReduceMotion ? 0 : [0, 8, 0]
-            }}
-            transition={{
-              opacity: { duration: 0.5, delay: 0.8 },
-              y: {
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }
-            }}
-            className="relative bg-amber-400/10 hover:bg-amber-400/20 rounded-full p-3 transition-all duration-300 group"
-            aria-label="Scroll to services"
-          >
-            <ChevronDown className="h-6 w-6 text-amber-400 group-hover:text-amber-300 transition-colors" />
-            <span className="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping"></span>
-          </motion.button>
+            {/* Modern Scroll Indicator - Mobile (moved here for closer positioning) */}
+            <motion.button
+              onClick={() => {
+                document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+              animate={{
+                opacity: 1,
+                y: shouldReduceMotion ? 0 : [0, 8, 0]
+              }}
+              transition={{
+                opacity: { duration: 0.5, delay: 0.8 },
+                y: {
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+              className="relative bg-amber-400/10 hover:bg-amber-400/20 rounded-full p-3 transition-all duration-300 group -mt-1"
+              aria-label="Scroll to services"
+            >
+              <ChevronDown className="h-6 w-6 text-amber-400 group-hover:text-amber-300 transition-colors" />
+              <span className="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping"></span>
+            </motion.button>
+          </div>
         </div>
       </div>
     </motion.section>
