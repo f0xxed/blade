@@ -119,7 +119,7 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
       </div>
 
       {/* Content below image - mobile and tablet only */}
-      <div className="lg:hidden bg-black flex flex-col px-4 pb-8 pt-4 min-h-[50vh] relative">
+      <div className="lg:hidden bg-black flex flex-col px-4 pb-8 pt-4 min-h-[35vh] sm:min-h-[50vh] relative">
         <div className="flex-1 flex flex-col items-center justify-start pt-4">
           {/* Container for aligned fancy headings - centered but with aligned lines */}
           <div className="flex flex-col items-start">
@@ -150,7 +150,7 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
             </motion.div>
 
             {/* Modern Scroll Indicator - Mobile (centered) */}
-            <div className="w-full flex justify-center -mt-1">
+            <div className="w-full flex justify-center mt-6 sm:-mt-1">
               <motion.button
                 onClick={() => {
                   document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
