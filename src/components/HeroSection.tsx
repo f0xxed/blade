@@ -119,8 +119,8 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
       </div>
 
       {/* Content below image - mobile and tablet only */}
-      <div className="lg:hidden bg-black flex flex-col px-4 py-8 min-h-[50vh] relative">
-        <div className="flex-1 flex flex-col items-center justify-center">
+      <div className="lg:hidden bg-black flex flex-col px-4 pb-8 pt-4 min-h-[50vh] relative">
+        <div className="flex-1 flex flex-col items-center justify-start pt-4">
           {/* Container for aligned fancy headings - centered but with aligned lines */}
           <div className="flex flex-col items-start">
             <div className="mb-6">
@@ -140,7 +140,7 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
-              className="mb-2"
+              className="mb-2 hidden sm:block"
             >
               <div className="space-y-0.5">
                 <h2 className="text-lg sm:text-xl text-slate-100 font-light leading-tight">Tampa's Premier</h2>
