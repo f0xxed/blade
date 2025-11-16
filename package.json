@@ -13,7 +13,9 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "optimize-images": "node scripts/optimize-images.mjs"
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "lighthouse:mobile": "lighthouse http://localhost:5173 --preset=perf --screenEmulation.mobile --throttling.cpuSlowdownMultiplier=4 --output=html --output=json --output-path=./docs/qa/lighthouse-mobile",
+    "lighthouse:desktop": "lighthouse http://localhost:5173 --preset=perf --screenEmulation.disabled --throttling.cpuSlowdownMultiplier=1 --output=html --output=json --output-path=./docs/qa/lighthouse-desktop"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -44,6 +46,7 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
     "jsdom": "^27.0.0",
+    "lighthouse": "^13.0.1",
     "postcss": "^8.4.47",
     "prettier": "^3.1.0",
     "shadcn": "^3.4.0",

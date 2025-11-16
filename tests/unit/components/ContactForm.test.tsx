@@ -348,8 +348,8 @@ describe('ContactForm Component', () => {
       const { container } = render(<ContactForm />);
 
       const section = container.querySelector('section');
-      expect(section?.className).toContain('py-12'); // Mobile: 48px (per front-end spec)
-      expect(section?.className).toContain('md:py-20'); // Desktop: 80px (per front-end spec - Story 2.8)
+      expect(section?.className).toContain('py-8'); // Mobile: 32px (compact design)
+      expect(section?.className).toContain('md:py-16'); // Desktop: 64px (compact design)
       expect(section?.className).toContain('px-4');
       expect(section?.className).toContain('md:px-8');
     });
@@ -366,8 +366,8 @@ describe('ContactForm Component', () => {
       const { container } = render(<ContactForm />);
 
       const heading = container.querySelector('h2');
-      expect(heading?.className).toContain('text-3xl'); // Mobile: 32px
-      expect(heading?.className).toContain('md:text-5xl'); // Desktop: 48px (per front-end spec - Story 2.8)
+      expect(heading?.className).toContain('text-2xl'); // Mobile: 24px (compact design)
+      expect(heading?.className).toContain('md:text-4xl'); // Desktop: 36px (compact design)
     });
   });
 });

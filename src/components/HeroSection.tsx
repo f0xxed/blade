@@ -46,26 +46,34 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
       id="hero"
       {...animationVariants}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="relative flex flex-col pt-[72px]"
+      className="relative flex flex-col min-h-screen pt-[72px]"
       role="banner"
       aria-label="Hero section"
     >
       {/* Hero background image with responsive WebP support */}
-      <div className="relative overflow-hidden sm:h-[70vh] lg:h-screen">
-        <picture>
+      <div className="relative overflow-hidden flex-1 sm:h-[70vh] lg:h-screen">
+        {/* Mobile: Use mobile logo */}
+        <img
+          src="/images/mobile-logo.jpeg"
+          alt="Blade and Barrel barbershop interior with vintage decor and bar seating"
+          className="lg:hidden absolute inset-0 w-full h-full object-contain object-center bg-black"
+        />
+
+        {/* Desktop: Use hero image */}
+        <picture className="hidden lg:block">
           <source
-            srcSet="/images/hero/hero-desktop.webp 1920w, /images/hero/hero-tablet.webp 1024w, /images/hero/hero-mobile.webp 640w"
+            srcSet="/images/hero/hero-desktop.webp 1920w, /images/hero/hero-tablet.webp 1024w"
             sizes="100vw"
             type="image/webp"
           />
           <source
-            srcSet="/images/hero/hero-desktop.jpg 1920w, /images/hero/hero-tablet.jpg 1024w, /images/hero/hero-mobile.jpg 640w"
+            srcSet="/images/hero/hero-desktop.jpg 1920w, /images/hero/hero-tablet.jpg 1024w"
             sizes="100vw"
           />
           <img
             src="/images/hero/hero.jpg"
             alt="Blade and Barrel barbershop interior with vintage decor and bar seating"
-            className="w-full h-auto sm:absolute sm:inset-0 sm:h-[70vh] lg:h-screen sm:object-cover sm:object-center bg-[#1A1A1A]"
+            className="absolute inset-0 w-full h-full object-cover object-center bg-black"
           />
         </picture>
 
@@ -114,13 +122,13 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
       </div>
 
       {/* Content below image - mobile only */}
-      <div className="lg:hidden bg-[#1A1A1A] py-12 px-4">
-        <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+      <div className="lg:hidden bg-black py-6 px-4">
+        <div className="max-w-5xl mx-auto flex flex-col items-center text-center justify-end">
           <motion.h1
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
-            className="text-[2.5rem] sm:text-5xl font-bold mb-6 text-amber-400"
+            className="text-3xl sm:text-5xl font-bold mb-3 text-amber-400"
           >
             {tagline}
           </motion.h1>
@@ -129,7 +137,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
-            className="text-lg sm:text-xl font-light mb-8 text-slate-100 max-w-3xl"
+            className="text-base sm:text-xl font-light mb-4 text-slate-100 max-w-3xl"
           >
             {headline}
           </motion.h2>

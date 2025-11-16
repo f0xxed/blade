@@ -53,15 +53,23 @@ export function Header({ onBookingClick }: HeaderProps) {
         initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 bg-[#1A1A1A] transition-all duration-300 ${
-          isScrolled ? 'shadow-lg' : ''
+        className={`fixed top-0 left-0 right-0 z-50 bg-black transition-all duration-300 ${
+          isScrolled ? 'shadow-xl border-b border-gray-800' : ''
         }`}
       >
         <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center" aria-label="Main navigation">
           {/* Logo */}
-          <div className="text-[#E8DCC8] text-xl md:text-2xl font-bold tracking-tight">
-            BLADE AND BARREL
-          </div>
+          <button
+            onClick={() => scrollToSection('hero')}
+            className="flex items-center transition-transform duration-200 hover:scale-105"
+            aria-label="Blade and Barrel - Home"
+          >
+            <img
+              src="/images/nav-logo.svg"
+              alt="Blade and Barrel"
+              className="h-10 md:h-12 w-auto"
+            />
+          </button>
 
           {/* Desktop Navigation - Hidden on mobile */}
           <ul className="hidden md:flex gap-4 lg:gap-8 items-center">
@@ -73,7 +81,7 @@ export function Header({ onBookingClick }: HeaderProps) {
                     e.preventDefault();
                     handleNavClick(link.sectionId);
                   }}
-                  className="text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200 text-sm lg:text-base font-medium whitespace-nowrap"
+                  className="text-white hover:text-[#B8935E] transition-colors duration-200 text-sm lg:text-base font-medium whitespace-nowrap"
                 >
                   {link.label}
                 </a>
@@ -94,7 +102,7 @@ export function Header({ onBookingClick }: HeaderProps) {
           {/* Mobile Hamburger Menu Button - Visible on mobile only */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200 p-3"
+            className="md:hidden text-white hover:text-[#B8935E] transition-colors duration-200 p-3"
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMobileMenuOpen}
           >
@@ -128,7 +136,7 @@ export function Header({ onBookingClick }: HeaderProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-[#1A1A1A] z-50 flex flex-col md:hidden"
+              className="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-black z-50 flex flex-col md:hidden"
               role="dialog"
               aria-label="Mobile navigation menu"
             >
@@ -136,7 +144,7 @@ export function Header({ onBookingClick }: HeaderProps) {
               <div className="flex justify-end p-4">
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200 p-3"
+                  className="text-white hover:text-[#B8935E] transition-colors duration-200 p-3"
                   aria-label="Close menu"
                 >
                   <X className="h-6 w-6" aria-hidden="true" />
@@ -153,7 +161,7 @@ export function Header({ onBookingClick }: HeaderProps) {
                       e.preventDefault();
                       handleNavClick(link.sectionId);
                     }}
-                    className="text-[#E8DCC8] hover:text-[#B8935E] transition-colors duration-200 text-2xl font-medium"
+                    className="text-white hover:text-[#B8935E] transition-colors duration-200 text-2xl font-medium"
                   >
                     {link.label}
                   </a>
