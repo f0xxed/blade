@@ -57,7 +57,7 @@ export function Header({ onBookingClick }: HeaderProps) {
           isScrolled ? 'shadow-xl border-b border-gray-800' : ''
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center" aria-label="Main navigation">
+        <nav className="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-4 flex justify-between items-center" aria-label="Main navigation">
           {/* Logo */}
           <button
             onClick={() => scrollToSection('hero')}
@@ -67,7 +67,7 @@ export function Header({ onBookingClick }: HeaderProps) {
             <img
               src="/images/nav-logo.svg"
               alt="Blade and Barrel"
-              className="h-10 md:h-12 w-auto"
+              className="h-8 md:h-12 w-auto"
             />
           </button>
 
@@ -102,14 +102,14 @@ export function Header({ onBookingClick }: HeaderProps) {
           {/* Mobile Hamburger Menu Button - Visible on mobile only */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white hover:text-[#B8935E] transition-colors duration-200 p-3"
+            className="md:hidden text-white hover:text-[#B8935E] transition-colors duration-200 p-2"
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6" aria-hidden="true" />
+              <X className="h-5 w-5" aria-hidden="true" />
             ) : (
-              <Menu className="h-6 w-6" aria-hidden="true" />
+              <Menu className="h-5 w-5" aria-hidden="true" />
             )}
           </button>
         </nav>

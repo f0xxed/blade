@@ -24,11 +24,9 @@ function App() {
       {/* Page Sections */}
       <main>
         <HeroSection
-        tagline="Groomed. Poured. Perfected."
-        headline="Tampa's Premier Barbershop Meets Neighborhood Bar"
-        ctaText="Coming Soon!"
-        onBookingClick={handleBookingClick}
-      />
+          tagline="Groomed. Poured. Perfected."
+          headline="Tampa's Premier Barbershop Meets Neighborhood Bar"
+        />
       <ServicesSection />
       <AboutSection />
       <ContactForm />

@@ -18,7 +18,7 @@ import { Loader2, CheckCircle2, XCircle, X } from 'lucide-react';
 /**
  * ContactForm Component
  *
- * Collects customer inquiries about private events, partnerships, or general questions.
+ * Collects customer contact information and inquiries.
  * Features client-side validation with React Hook Form and Zod schema validation.
  * Prepared for backend integration in Epic 3.
  *
@@ -27,7 +27,8 @@ import { Loader2, CheckCircle2, XCircle, X } from 'lucide-react';
 
 // Validation schema with Zod
 const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
+  firstName: z.string().min(2, 'First name must be at least 2 characters'),
+  lastName: z.string().min(2, 'Last name must be at least 2 characters'),
   email: z
     .string()
     .email('Please enter a valid email address')
@@ -37,15 +38,19 @@ const contactFormSchema = z.object({
     ),
   phone: z
     .string()
-    .optional()
+    .min(1, 'Phone number is required')
     .refine(
-      (val) => !val || /^[\d\s\-\(\)\+]*$/.test(val),
+      (val) => /^[\d\s\-\(\)\+]*$/.test(val),
       'Phone number can only contain numbers, spaces, dashes, parentheses, and +'
     )
     .refine(
-      (val) => !val || val.replace(/[\s\-\(\)\+]/g, '').length >= 10,
+      (val) => val.replace(/[\s\-\(\)\+]/g, '').length >= 10,
       'Phone number must be at least 10 digits'
     ),
+  message: z
+    .string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(1000, 'Message cannot exceed 1000 characters'),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -62,9 +67,11 @@ export function ContactForm({ className }: ContactFormProps = {}) {
     resolver: zodResolver(contactFormSchema),
     mode: 'onBlur',
     defaultValues: {
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       phone: '',
+      message: '',
     },
   });
 
@@ -92,31 +99,31 @@ export function ContactForm({ className }: ContactFormProps = {}) {
   return (
     <section
       id="contact"
-      className={`py-6 md:py-12 px-4 md:px-8 bg-[#E8DCC8] ${className || ''}`}
+      className={`py-8 md:py-16 px-4 md:px-8 bg-[#E8DCC8] ${className || ''}`}
       aria-label="Contact Form"
     >
-      <div className="max-w-lg mx-auto">
-        <h2 className="text-xl md:text-3xl font-bold mb-4 text-[#1A1A1A]">Request Service</h2>
+      <div className="max-w-xl mx-auto">
+        <h2 className="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-[#1A1A1A] text-center">Contact Us</h2>
 
         {/* Success Message */}
         {submissionStatus === 'success' && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-3 p-2.5 bg-[#6B8E23]/10 border border-[#6B8E23] rounded-lg flex items-center gap-2"
+            className="mb-4 p-3 bg-[#6B8E23]/10 border border-[#6B8E23] rounded-lg flex items-center gap-2"
             role="alert"
             aria-live="polite"
           >
-            <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#6B8E23] flex-shrink-0" aria-hidden="true" />
+            <CheckCircle2 className="h-4 w-4 text-[#6B8E23] flex-shrink-0" aria-hidden="true" />
             <div className="flex-1">
-              <p className="text-xs md:text-sm text-[#6B8E23] font-medium">Service request received! We'll contact you shortly.</p>
+              <p className="text-sm text-[#6B8E23] font-medium">Thank you! We'll contact you soon.</p>
             </div>
             <button
               onClick={() => setSubmissionStatus('idle')}
               className="text-[#6B8E23] hover:text-[#6B8E23]/70 transition-colors"
               aria-label="Dismiss success message"
             >
-              <X className="h-3.5 w-3.5 md:h-4 md:w-4" />
+              <X className="h-4 w-4" />
             </button>
           </motion.div>
         )}
@@ -126,14 +133,14 @@ export function ContactForm({ className }: ContactFormProps = {}) {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-3 p-2.5 bg-[#DC2626]/10 border border-[#DC2626] rounded-lg flex items-center gap-2"
+            className="mb-4 p-3 bg-[#DC2626]/10 border border-[#DC2626] rounded-lg flex items-center gap-2"
             role="alert"
             aria-live="polite"
           >
-            <XCircle className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#DC2626] flex-shrink-0" aria-hidden="true" />
+            <XCircle className="h-4 w-4 text-[#DC2626] flex-shrink-0" aria-hidden="true" />
             <div className="flex-1">
-              <p className="text-xs md:text-sm text-[#DC2626] font-medium">
-                Error submitting request. Call{' '}
+              <p className="text-sm text-[#DC2626] font-medium">
+                Error submitting form. Please call{' '}
                 <a href="tel:+18138741508" className="underline hover:no-underline font-semibold">
                   813-874-1508
                 </a>
@@ -144,29 +151,29 @@ export function ContactForm({ className }: ContactFormProps = {}) {
               className="text-[#DC2626] hover:text-[#DC2626]/70 transition-colors"
               aria-label="Dismiss error message"
             >
-              <X className="h-3.5 w-3.5 md:h-4 md:w-4" />
+              <X className="h-4 w-4" />
             </button>
           </motion.div>
         )}
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            {/* Name and Email Fields - Grid on desktop, stacked on mobile */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {/* Name Field */}
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 md:space-y-4">
+            {/* First and Last Name Fields - Grid */}
+            <div className="grid grid-cols-2 gap-2 md:gap-4">
+              {/* First Name Field */}
               <FormField
                 control={form.control}
-                name="name"
+                name="firstName"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-xs md:text-sm font-medium text-[#1A1A1A]">
-                      Name <span className="text-[#DC2626]">*</span>
+                      First Name <span className="text-[#DC2626]">*</span>
                     </FormLabel>
                     <FormControl>
                       <Input
                         type="text"
-                        placeholder="Your name"
-                        autoComplete="name"
+                        placeholder="John"
+                        autoComplete="given-name"
                         className="h-9 md:h-10 text-sm md:text-base border-[#2C3539] focus:border-[#B8935E] focus:ring-2 focus:ring-[#B8935E]/20 placeholder:text-[#8B6F47]/60"
                         {...field}
                       />
@@ -176,20 +183,20 @@ export function ContactForm({ className }: ContactFormProps = {}) {
                 )}
               />
 
-              {/* Email Field */}
+              {/* Last Name Field */}
               <FormField
                 control={form.control}
-                name="email"
+                name="lastName"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-xs md:text-sm font-medium text-[#1A1A1A]">
-                      Email <span className="text-[#DC2626]">*</span>
+                      Last Name <span className="text-[#DC2626]">*</span>
                     </FormLabel>
                     <FormControl>
                       <Input
-                        type="email"
-                        placeholder="email@example.com"
-                        autoComplete="email"
+                        type="text"
+                        placeholder="Doe"
+                        autoComplete="family-name"
                         className="h-9 md:h-10 text-sm md:text-base border-[#2C3539] focus:border-[#B8935E] focus:ring-2 focus:ring-[#B8935E]/20 placeholder:text-[#8B6F47]/60"
                         {...field}
                       />
@@ -200,6 +207,29 @@ export function ContactForm({ className }: ContactFormProps = {}) {
               />
             </div>
 
+            {/* Email Field */}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs md:text-sm font-medium text-[#1A1A1A]">
+                    Email <span className="text-[#DC2626]">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="john@example.com"
+                      autoComplete="email"
+                      className="h-9 md:h-10 text-sm md:text-base border-[#2C3539] focus:border-[#B8935E] focus:ring-2 focus:ring-[#B8935E]/20 placeholder:text-[#8B6F47]/60"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs text-[#DC2626]" />
+                </FormItem>
+              )}
+            />
+
             {/* Phone Field */}
             <FormField
               control={form.control}
@@ -207,7 +237,7 @@ export function ContactForm({ className }: ContactFormProps = {}) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs md:text-sm font-medium text-[#1A1A1A]">
-                    Phone <span className="text-[#6B8E23] text-xs">(Optional)</span>
+                    Phone <span className="text-[#DC2626]">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -247,21 +277,42 @@ export function ContactForm({ className }: ContactFormProps = {}) {
               )}
             />
 
+            {/* Message Field */}
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs md:text-sm font-medium text-[#1A1A1A]">
+                    Message <span className="text-[#DC2626]">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <textarea
+                      placeholder="How can we help you?"
+                      className="w-full min-h-[100px] md:min-h-[120px] px-3 py-2 text-sm md:text-base border border-[#2C3539] rounded-md focus:border-[#B8935E] focus:ring-2 focus:ring-[#B8935E]/20 placeholder:text-[#8B6F47]/60 resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs text-[#DC2626]" />
+                </FormItem>
+              )}
+            />
+
             {/* Submit Button */}
-            <div className="pt-2">
+            <div className="pt-2 md:pt-4">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#B8935E] hover:bg-[#A07D4A] active:bg-[#8C6B3B] text-white font-semibold px-6 py-2 h-11 md:h-12 text-sm md:text-base rounded-lg shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                aria-label={isSubmitting ? 'Requesting service' : 'Request service'}
+                className="w-full bg-[#B8935E] hover:bg-[#A07D4A] active:bg-[#8C6B3B] text-white font-semibold px-6 py-2 h-10 md:h-12 text-sm md:text-base rounded-lg shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label={isSubmitting ? 'Sending message' : 'Send message'}
               >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
-                    Processing...
+                    Sending...
                   </>
                 ) : (
-                  'Request Service'
+                  'Send Message'
                 )}
               </Button>
             </div>

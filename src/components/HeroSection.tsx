@@ -1,28 +1,22 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { useAnalytics } from '@/hooks/useAnalytics';
+import { ChevronDown } from 'lucide-react';
 
 /**
  * HeroSection Component
  *
- * Full-screen hero section with background image, tagline, headline, and CTA button.
+ * Full-screen hero section with background image, tagline, and headline.
  * Features Framer Motion entrance animation and respects reduced motion preferences.
  *
  * @param tagline - Primary tagline displayed prominently (e.g., "Groomed. Poured. Perfected.")
  * @param headline - Secondary headline describing the business concept
- * @param ctaText - Text for the call-to-action button
- * @param onBookingClick - Callback function when CTA button is clicked
  */
 
 export interface HeroSectionProps {
   tagline: string;
   headline: string;
-  ctaText: string;
-  onBookingClick: () => void;
 }
 
-export function HeroSection({ tagline, headline, ctaText, onBookingClick }: HeroSectionProps) {
-  const { trackEvent } = useAnalytics();
+export function HeroSection({ tagline, headline }: HeroSectionProps) {
   const shouldReduceMotion = useReducedMotion();
 
   // Animation configuration - disabled if user prefers reduced motion
@@ -30,37 +24,26 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
     ? { initial: { opacity: 1 }, animate: { opacity: 1 } }
     : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
 
-  const handleBookingClick = () => {
-    // Track analytics event
-    trackEvent('booking_initiated', {
-      eventCategory: 'conversion',
-      eventLabel: 'Hero CTA clicked',
-    });
-
-    // Execute callback
-    onBookingClick();
-  };
-
   return (
     <motion.section
       id="hero"
       {...animationVariants}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="relative flex flex-col min-h-screen pt-[72px]"
+      className="relative flex flex-col min-h-screen pt-[48px] md:pt-[72px]"
       role="banner"
       aria-label="Hero section"
     >
       {/* Hero background image with responsive WebP support */}
-      <div className="relative overflow-hidden flex-1 sm:h-[70vh] lg:h-screen">
+      <div className="relative overflow-hidden flex-1 sm:h-[70vh] lg:h-screen flex items-center justify-center bg-black">
         {/* Mobile: Use mobile logo */}
         <img
           src="/images/mobile-logo.jpeg"
           alt="Blade and Barrel barbershop interior with vintage decor and bar seating"
-          className="lg:hidden absolute inset-0 w-full h-full object-contain object-center bg-black"
+          className="lg:hidden w-full h-auto max-h-[50vh] object-contain object-center"
         />
 
         {/* Desktop: Use hero image */}
-        <picture className="hidden lg:block">
+        <picture className="hidden lg:block absolute inset-0">
           <source
             srcSet="/images/hero/hero-desktop.webp 1920w, /images/hero/hero-tablet.webp 1024w"
             sizes="100vw"
@@ -73,7 +56,7 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
           <img
             src="/images/hero/hero.jpg"
             alt="Blade and Barrel barbershop interior with vintage decor and bar seating"
-            className="absolute inset-0 w-full h-full object-cover object-center bg-black"
+            className="w-full h-full object-cover object-center bg-black"
           />
         </picture>
 
@@ -99,63 +82,92 @@ export function HeroSection({ tagline, headline, ctaText, onBookingClick }: Hero
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
-              className="text-xl md:text-2xl lg:text-3xl font-light mb-8 md:mb-12 text-slate-100 max-w-3xl"
+              className="text-xl md:text-2xl lg:text-3xl font-light text-slate-100 max-w-3xl"
             >
               {headline}
             </motion.h2>
-
-            <motion.div
-              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.6 }}
-            >
-              <Button
-                size="lg"
-                onClick={handleBookingClick}
-                className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-6 text-lg transition-all duration-200 hover:scale-105 active:scale-95"
-              >
-                {ctaText}
-              </Button>
-            </motion.div>
           </div>
         </div>
+
+        {/* Scroll Indicator - Desktop */}
+        <motion.button
+          onClick={() => {
+            document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+          animate={{ opacity: 1, y: shouldReduceMotion ? 0 : [0, 10, 0] }}
+          transition={{
+            opacity: { duration: 0.5, delay: 0.8 },
+            y: {
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+          className="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 text-amber-400 hover:text-amber-300 transition-colors cursor-pointer z-20"
+          aria-label="Scroll to services"
+        >
+          <ChevronDown className="h-10 w-10" />
+        </motion.button>
       </div>
 
       {/* Content below image - mobile only */}
-      <div className="lg:hidden bg-black py-6 px-4">
-        <div className="max-w-5xl mx-auto flex flex-col items-center text-center justify-end">
-          <motion.h1
+      <div className="lg:hidden bg-black flex-1 flex flex-col items-center justify-center px-4 py-8 relative">
+        <div className="max-w-5xl mx-auto flex flex-col items-center">
+          <motion.div
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
-            className="text-3xl sm:text-5xl font-bold mb-3 text-amber-400"
+            className="mb-4"
           >
-            {tagline}
-          </motion.h1>
+            {/* Mobile stacked version */}
+            <div className="sm:hidden relative">
+              <div className="flex items-center gap-3">
+                <div className="w-0.5 h-32 bg-amber-400/50"></div>
+                <div className="space-y-1">
+                  <h1 className="text-3xl font-bold text-amber-400 leading-none">Groomed.</h1>
+                  <h1 className="text-3xl font-bold text-amber-300 leading-none pl-4">Poured.</h1>
+                  <h1 className="text-3xl font-bold text-amber-400 leading-none pl-8">Perfected.</h1>
+                </div>
+              </div>
+            </div>
+
+            {/* Tablet/larger mobile horizontal version */}
+            <h1 className="hidden sm:block text-5xl font-bold text-amber-400 text-center">
+              {tagline}
+            </h1>
+          </motion.div>
 
           <motion.h2
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
-            className="text-base sm:text-xl font-light mb-4 text-slate-100 max-w-3xl"
+            className="text-lg sm:text-xl font-light text-slate-100 max-w-3xl text-center px-4"
           >
             {headline}
           </motion.h2>
-
-          <motion.div
-            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.6 }}
-          >
-            <Button
-              size="lg"
-              onClick={handleBookingClick}
-              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-6 text-lg transition-all duration-200 hover:scale-105 active:scale-95"
-            >
-              {ctaText}
-            </Button>
-          </motion.div>
         </div>
+
+        {/* Scroll Indicator - Mobile */}
+        <motion.button
+          onClick={() => {
+            document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+          animate={{ opacity: 1, y: shouldReduceMotion ? 0 : [0, 10, 0] }}
+          transition={{
+            opacity: { duration: 0.5, delay: 0.8 },
+            y: {
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 text-amber-400 hover:text-amber-300 transition-colors"
+          aria-label="Scroll to services"
+        >
+          <ChevronDown className="h-8 w-8" />
+        </motion.button>
       </div>
     </motion.section>
   );
