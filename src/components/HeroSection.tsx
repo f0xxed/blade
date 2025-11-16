@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { FancyMobileHeading } from '@/components/ui/FancyMobileHeading';
 
 /**
  * HeroSection Component
@@ -89,85 +90,93 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* Scroll Indicator - Desktop */}
-        <motion.button
-          onClick={() => {
-            document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
-          animate={{ opacity: 1, y: shouldReduceMotion ? 0 : [0, 10, 0] }}
-          transition={{
-            opacity: { duration: 0.5, delay: 0.8 },
-            y: {
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }}
-          className="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 text-amber-400 hover:text-amber-300 transition-colors cursor-pointer z-20"
-          aria-label="Scroll to services"
-        >
-          <ChevronDown className="h-10 w-10" />
-        </motion.button>
+        {/* Modern Scroll Indicator - Desktop */}
+        <div className="hidden lg:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center z-20">
+          <motion.button
+            onClick={() => {
+              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+            animate={{
+              opacity: 1,
+              y: shouldReduceMotion ? 0 : [0, 10, 0]
+            }}
+            transition={{
+              opacity: { duration: 0.5, delay: 0.8 },
+              y: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
+            }}
+            className="relative bg-amber-400/10 hover:bg-amber-400/20 rounded-full p-4 transition-all duration-300 group cursor-pointer"
+            aria-label="Scroll to services"
+          >
+            <ChevronDown className="h-8 w-8 text-amber-400 group-hover:text-amber-300 transition-colors" />
+            <span className="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping"></span>
+          </motion.button>
+        </div>
       </div>
 
-      {/* Content below image - mobile only */}
-      <div className="lg:hidden bg-black flex-1 flex flex-col items-center justify-center px-4 py-8 relative">
-        <div className="max-w-5xl mx-auto flex flex-col items-center">
-          <motion.div
-            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
-            className="mb-4"
-          >
-            {/* Mobile stacked version */}
-            <div className="sm:hidden relative">
-              <div className="flex items-center gap-3">
-                <div className="w-0.5 h-32 bg-amber-400/50"></div>
-                <div className="space-y-1">
-                  <h1 className="text-3xl font-bold text-amber-400 leading-none">Groomed.</h1>
-                  <h1 className="text-3xl font-bold text-amber-300 leading-none pl-4">Poured.</h1>
-                  <h1 className="text-3xl font-bold text-amber-400 leading-none pl-8">Perfected.</h1>
-                </div>
-              </div>
+      {/* Content below image - mobile and tablet only */}
+      <div className="lg:hidden bg-black flex flex-col px-4 py-8 min-h-[50vh] relative">
+        <div className="flex-1 flex flex-col items-center justify-center">
+          {/* Container for aligned fancy headings - centered but with aligned lines */}
+          <div className="flex flex-col items-start">
+            <div className="mb-6">
+              {/* Fancy stacked version for mobile/tablet - left aligned text */}
+              <FancyMobileHeading
+                words={['Groomed.', 'Poured.', 'Perfected.']}
+                textColors={['text-amber-400', 'text-amber-300', 'text-amber-400']}
+                size="medium"
+                animationDelay={0.2}
+                align="left"
+                noIndent={true}
+              />
             </div>
 
-            {/* Tablet/larger mobile horizontal version */}
-            <h1 className="hidden sm:block text-5xl font-bold text-amber-400 text-center">
-              {tagline}
-            </h1>
-          </motion.div>
-
-          <motion.h2
-            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
-            className="text-lg sm:text-xl font-light text-slate-100 max-w-3xl text-center px-4"
-          >
-            {headline}
-          </motion.h2>
+            {/* Fancy headline for mobile/tablet with no indentation and no line */}
+            <motion.div
+              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
+              className="mb-12"
+            >
+              <div className="space-y-0.5">
+                <h2 className="text-lg sm:text-xl text-slate-100 font-light leading-tight">Tampa's Premier</h2>
+                <h2 className="text-lg sm:text-xl text-slate-200 font-light leading-tight">Barbershop Meets</h2>
+                <h2 className="text-lg sm:text-xl text-slate-100 font-light leading-tight">Neighborhood Bar</h2>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Scroll Indicator - Mobile */}
-        <motion.button
-          onClick={() => {
-            document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
-          animate={{ opacity: 1, y: shouldReduceMotion ? 0 : [0, 10, 0] }}
-          transition={{
-            opacity: { duration: 0.5, delay: 0.8 },
-            y: {
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 text-amber-400 hover:text-amber-300 transition-colors"
-          aria-label="Scroll to services"
-        >
-          <ChevronDown className="h-8 w-8" />
-        </motion.button>
+        {/* Modern Scroll Indicator - Mobile */}
+        <div className="flex flex-col items-center pb-6">
+          <motion.button
+            onClick={() => {
+              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+            animate={{
+              opacity: 1,
+              y: shouldReduceMotion ? 0 : [0, 8, 0]
+            }}
+            transition={{
+              opacity: { duration: 0.5, delay: 0.8 },
+              y: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
+            }}
+            className="relative bg-amber-400/10 hover:bg-amber-400/20 rounded-full p-3 transition-all duration-300 group"
+            aria-label="Scroll to services"
+          >
+            <ChevronDown className="h-6 w-6 text-amber-400 group-hover:text-amber-300 transition-colors" />
+            <span className="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping"></span>
+          </motion.button>
+        </div>
       </div>
     </motion.section>
   );

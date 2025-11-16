@@ -1,3 +1,5 @@
+import { FancyMobileHeading } from '@/components/ui/FancyMobileHeading';
+
 interface AboutSectionProps {
   className?: string;
 }
@@ -24,7 +26,18 @@ export function AboutSection({ className }: AboutSectionProps = {}) {
 
           {/* Text content (right on desktop, bottom on mobile) */}
           <div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-[#1A1A1A]">
+            {/* Fancy heading for mobile/tablet only */}
+            <div className="lg:hidden mb-6">
+              <FancyMobileHeading
+                words={['Our', 'Story']}
+                textColors={['text-[#B8935E]', 'text-[#8B6F47]']}
+                lineColor="bg-[#B8935E]/50"
+                size="large"
+              />
+            </div>
+
+            {/* Regular heading for desktop */}
+            <h2 className="hidden lg:block text-3xl md:text-5xl font-bold mb-6 text-[#1A1A1A]">
               Our Story
             </h2>
 

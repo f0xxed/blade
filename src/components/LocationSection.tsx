@@ -1,3 +1,5 @@
+import { FancyMobileHeading } from '@/components/ui/FancyMobileHeading';
+
 interface LocationSectionProps {
   className?: string;
 }
@@ -14,7 +16,18 @@ export function LocationSection({ className }: LocationSectionProps = {}) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6">
           {/* Visit Us - Column 1 */}
           <div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#E8DCC8]">Visit Us</h2>
+            {/* Fancy heading for mobile/tablet only */}
+            <div className="lg:hidden mb-4">
+              <FancyMobileHeading
+                words={['Visit', 'Us']}
+                textColors={['text-[#E8DCC8]', 'text-[#D4C4B0]']}
+                lineColor="bg-[#B8935E]/50"
+                size="large"
+              />
+            </div>
+
+            {/* Regular heading for desktop */}
+            <h2 className="hidden lg:block text-3xl md:text-5xl font-bold mb-4 text-[#E8DCC8]">Visit Us</h2>
             <address className="not-italic">
               <p className="text-base font-semibold mb-1 text-[#E8DCC8]">
                 Blade and Barrel
