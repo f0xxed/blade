@@ -30,7 +30,7 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
       id="hero"
       {...animationVariants}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="relative flex flex-col min-h-screen pt-[48px] md:pt-[72px]"
+      className="relative flex flex-col min-h-[100dvh] pt-[48px] md:pt-[72px]"
       role="banner"
       aria-label="Hero section"
     >
@@ -40,7 +40,7 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
         <img
           src="/images/mobile-logo.jpeg"
           alt="Blade and Barrel barbershop interior with vintage decor and bar seating"
-          className="lg:hidden w-full h-auto max-h-[50vh] object-contain object-center"
+          className="lg:hidden w-full h-auto max-h-[40vh] sm:max-h-[45vh] object-contain object-center"
         />
 
         {/* Desktop: Use hero image */}
@@ -119,11 +119,11 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
       </div>
 
       {/* Content below image - mobile and tablet only */}
-      <div className="lg:hidden bg-black flex flex-col px-4 pb-8 pt-4 min-h-[35vh] sm:min-h-[50vh] relative">
-        <div className="flex-1 flex flex-col items-center justify-start pt-4">
+      <div className="lg:hidden bg-black flex flex-col px-4 pb-6 pt-3 relative">
+        <div className="flex-1 flex flex-col items-center justify-start pt-2">
           {/* Container for aligned fancy headings - centered but with aligned lines */}
           <div className="flex flex-col items-start">
-            <div className="mb-6">
+            <div className="mb-4 sm:mb-6">
               {/* Fancy stacked version for mobile/tablet - left aligned text */}
               <FancyMobileHeading
                 words={['Groomed.', 'Poured.', 'Perfected.']}
@@ -150,7 +150,7 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
             </motion.div>
 
             {/* Modern Scroll Indicator - Mobile (centered) */}
-            <div className="w-full flex justify-center mt-6 sm:-mt-1">
+            <div className="w-full flex justify-center mt-4 sm:mt-6">
               <motion.button
                 onClick={() => {
                   document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });

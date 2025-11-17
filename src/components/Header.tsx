@@ -57,7 +57,7 @@ export function Header({ onBookingClick }: HeaderProps) {
           isScrolled ? 'shadow-xl border-b border-gray-800' : ''
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-4 md:px-8 py-2 md:py-4 flex justify-between items-center" aria-label="Main navigation">
+        <nav className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center" aria-label="Main navigation">
           {/* Logo */}
           <button
             onClick={() => scrollToSection('hero')}
@@ -67,12 +67,12 @@ export function Header({ onBookingClick }: HeaderProps) {
             <img
               src="/images/nav-logo.svg"
               alt="Blade and Barrel"
-              className="h-8 md:h-12 w-auto"
+              className="h-12 w-auto"
             />
           </button>
 
-          {/* Desktop Navigation - Hidden on mobile */}
-          <ul className="hidden md:flex gap-4 lg:gap-8 items-center">
+          {/* Desktop Navigation - Hidden on mobile and tablet */}
+          <ul className="hidden lg:flex gap-8 items-center">
             {navLinks.map((link) => (
               <li key={link.sectionId}>
                 <a
@@ -81,7 +81,7 @@ export function Header({ onBookingClick }: HeaderProps) {
                     e.preventDefault();
                     handleNavClick(link.sectionId);
                   }}
-                  className="text-white hover:text-[#B8935E] transition-colors duration-200 text-sm lg:text-base font-medium whitespace-nowrap"
+                  className="text-white hover:text-[#B8935E] transition-colors duration-200 text-base font-medium whitespace-nowrap"
                 >
                   {link.label}
                 </a>
@@ -89,20 +89,20 @@ export function Header({ onBookingClick }: HeaderProps) {
             ))}
           </ul>
 
-          {/* Desktop Book Appointment Button - Hidden on mobile, shows at lg breakpoint to prevent crowding */}
+          {/* Desktop Book Appointment Button - Hidden on mobile/tablet, shows at lg breakpoint (desktop) */}
           <div className="hidden lg:block">
             <Button
               onClick={handleBookingClick}
-              className="bg-[#B8935E] hover:bg-[#A07D4A] text-[#1A1A1A] font-semibold px-4 lg:px-6 py-2 transition-colors duration-200 whitespace-nowrap text-sm lg:text-base"
+              className="bg-[#B8935E] hover:bg-[#A07D4A] text-[#1A1A1A] font-semibold px-6 py-2 transition-colors duration-200 whitespace-nowrap text-base"
             >
               Book Appointment
             </Button>
           </div>
 
-          {/* Mobile Hamburger Menu Button - Visible on mobile only */}
+          {/* Mobile Hamburger Menu Button - Visible on mobile and tablet */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white hover:text-[#B8935E] transition-colors duration-200 p-2"
+            className="lg:hidden text-white hover:text-[#B8935E] transition-colors duration-200 p-2"
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMobileMenuOpen}
           >
@@ -125,7 +125,7 @@ export function Header({ onBookingClick }: HeaderProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/60 z-40 md:hidden"
+              className="fixed inset-0 bg-black/60 z-40 lg:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
               aria-hidden="true"
             />
@@ -136,7 +136,7 @@ export function Header({ onBookingClick }: HeaderProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-black z-50 flex flex-col md:hidden"
+              className="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-black z-50 flex flex-col lg:hidden"
               role="dialog"
               aria-label="Mobile navigation menu"
             >
