@@ -107,9 +107,9 @@ export function Header({ onBookingClick }: HeaderProps) {
             aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? (
-              <X className="h-5 w-5" aria-hidden="true" />
+              <X className="h-7 w-7" aria-hidden="true" />
             ) : (
-              <Menu className="h-5 w-5" aria-hidden="true" />
+              <Menu className="h-7 w-7" aria-hidden="true" />
             )}
           </button>
         </nav>
