@@ -33,108 +33,34 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
       role="banner"
       aria-label="Hero section"
     >
-      {/* Hero background image with responsive WebP support */}
-      <div className="relative overflow-hidden flex-1 sm:h-[70vh] lg:h-screen flex items-center justify-center bg-black">
-        {/* Mobile: Use mobile logo */}
+      {/* Hero background with logo image - unified across all screen sizes */}
+      <div className="relative overflow-hidden flex-1 flex items-center justify-center bg-black">
+        {/* Logo image - responsive sizing */}
         <img
           src="/images/mobile-logo.jpeg"
           alt="Blade and Barrel barbershop interior with vintage decor and bar seating"
-          className="lg:hidden w-full h-auto max-h-[40vh] sm:max-h-[45vh] object-contain object-center"
+          className="w-full h-auto max-h-[40vh] sm:max-h-[45vh] md:max-h-[50vh] lg:max-h-[55vh] object-contain object-center"
         />
-
-        {/* Desktop: Use hero image */}
-        <picture className="hidden lg:block absolute inset-0">
-          <source
-            srcSet="/images/hero/hero-desktop.webp 1920w, /images/hero/hero-tablet.webp 1024w"
-            sizes="100vw"
-            type="image/webp"
-          />
-          <source
-            srcSet="/images/hero/hero-desktop.jpg 1920w, /images/hero/hero-tablet.jpg 1024w"
-            sizes="100vw"
-          />
-          <img
-            src="/images/hero/hero.jpg"
-            alt="Blade and Barrel barbershop interior with vintage decor and bar seating"
-            className="w-full h-full object-cover object-center bg-black"
-          />
-        </picture>
-
-        {/* Dark gradient overlay for text readability - hidden on mobile, visible on desktop */}
-        <div
-          className="hidden lg:block absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"
-          aria-hidden="true"
-        />
-
-        {/* Content overlay - desktop only */}
-        <div className="hidden lg:flex absolute inset-0 items-end pb-24">
-          <div className="relative z-10 text-center text-white px-4 md:px-8 lg:px-12 max-w-5xl mx-auto flex flex-col items-center w-full">
-            <motion.h1
-              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
-              className="text-[2.5rem] md:text-6xl lg:text-[4rem] font-bold mb-6 md:mb-8 text-amber-400"
-            >
-              {tagline}
-            </motion.h1>
-
-            <motion.h2
-              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.4 }}
-              className="text-xl md:text-2xl lg:text-3xl font-light text-slate-100 max-w-3xl"
-            >
-              {headline}
-            </motion.h2>
-          </div>
-        </div>
-
-        {/* Modern Scroll Indicator - Desktop */}
-        <div className="hidden lg:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center z-20">
-          <motion.button
-            onClick={() => {
-              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
-            animate={{
-              opacity: 1,
-              y: shouldReduceMotion ? 0 : [0, 10, 0]
-            }}
-            transition={{
-              opacity: { duration: 0.5, delay: 0.8 },
-              y: {
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }
-            }}
-            className="relative bg-amber-400/10 hover:bg-amber-400/20 rounded-full p-4 transition-all duration-300 group cursor-pointer"
-            aria-label="Scroll to services"
-          >
-            <ChevronDown className="h-8 w-8 text-amber-400 group-hover:text-amber-300 transition-colors" />
-            <span className="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping"></span>
-          </motion.button>
-        </div>
       </div>
 
-      {/* Content below image - mobile and tablet only */}
-      <div className="lg:hidden bg-black flex flex-col px-4 pb-6 pt-4 relative">
+      {/* Content below image - unified across all screen sizes */}
+      <div className="bg-black flex flex-col px-4 pb-6 pt-4 md:pb-8 md:pt-6 lg:pb-10 lg:pt-8 relative">
         <div className="flex-1 flex flex-col items-center justify-center">
-          {/* Headline for mobile/tablet */}
+          {/* Headline - responsive text sizing */}
           <motion.div
             initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 }}
-            className="mb-6 text-center"
+            className="mb-6 md:mb-8 text-center"
           >
-            <div className="space-y-1">
-              <h1 className="text-xl sm:text-2xl text-slate-100 font-light leading-tight">Tampa's Premier</h1>
-              <h1 className="text-xl sm:text-2xl text-slate-200 font-light leading-tight">Barbershop Meets</h1>
-              <h1 className="text-xl sm:text-2xl text-slate-100 font-light leading-tight">Neighborhood Bar</h1>
+            <div className="space-y-1 md:space-y-2">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-slate-100 font-light leading-tight">Tampa's Premier</h1>
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-slate-200 font-light leading-tight">Barbershop Meets</h1>
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-slate-100 font-light leading-tight">Neighborhood Bar</h1>
             </div>
           </motion.div>
 
-          {/* Modern Scroll Indicator - Mobile (centered and larger) */}
+          {/* Modern Scroll Indicator */}
           <div className="flex justify-center">
             <motion.button
               onClick={() => {
@@ -153,11 +79,11 @@ export function HeroSection({ tagline, headline }: HeroSectionProps) {
                   ease: "easeInOut"
                 }
               }}
-              className="relative bg-amber-400/10 hover:bg-amber-400/20 rounded-full p-5 transition-all duration-300 group"
+              className="relative rounded-full p-5 md:p-6 lg:p-7 transition-all duration-300 group"
               aria-label="Scroll to services"
             >
-              <ChevronDown className="h-10 w-10 text-amber-400 group-hover:text-amber-300 transition-colors" />
-              <span className="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping"></span>
+              <ChevronDown className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 text-amber-400 group-hover:text-amber-300 transition-colors" />
+              <span className="absolute inset-0 md:inset-3 lg:inset-5 rounded-full border-2 border-amber-400/30 animate-ping"></span>
             </motion.button>
           </div>
         </div>
