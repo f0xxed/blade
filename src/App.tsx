@@ -23,10 +23,7 @@ function App() {
 
       {/* Page Sections */}
       <main>
-        <HeroSection
-          tagline="Groomed. Poured. Perfected."
-          headline="Tampa's Premier Barbershop Meets Neighborhood Bar"
-        />
+        <HeroSection />
       <ServicesSection />
       <AboutSection />
       <ContactForm />

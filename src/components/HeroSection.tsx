@@ -4,19 +4,12 @@ import { ChevronDown } from 'lucide-react';
 /**
  * HeroSection Component
  *
- * Full-screen hero section with background image, tagline, and headline.
+ * Full-screen hero section with centered logo and headline.
  * Features Framer Motion entrance animation and respects reduced motion preferences.
- *
- * @param tagline - Primary tagline displayed prominently (e.g., "Groomed. Poured. Perfected.")
- * @param headline - Secondary headline describing the business concept
+ * Uses mobile-first centered layout across all breakpoints.
  */
 
-export interface HeroSectionProps {
-  tagline: string;
-  headline: string;
-}
-
-export function HeroSection({ tagline, headline }: HeroSectionProps) {
+export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
 
   // Animation configuration - disabled if user prefers reduced motion
