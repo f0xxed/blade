@@ -13,3 +13,17 @@ export interface ServiceOffering {
   price: number;        // Price in USD
   duration?: number;    // Duration in minutes (optional)
 }
+
+/**
+ * Service Package Interface
+ * Represents a monthly grooming subscription package
+ */
+export interface ServicePackage {
+  id: string;                    // Unique identifier
+  name: string;                  // Package name
+  price: number;                 // Monthly price in USD
+  includes: string[];            // Array of included services per month
+  tagline?: string;              // Optional tagline/subtitle
+  additionalNote?: string;       // Optional additional information
+  isSpecial?: boolean;           // Special/featured package flag
+}
